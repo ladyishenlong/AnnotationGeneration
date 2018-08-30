@@ -19,7 +19,7 @@ public abstract class BaseProxyInfo {
     protected String proxyClassName;    //注解生成的代理类名称 (注解所在类名)$$(实现的接口名)
 
     public BaseProxyInfo(final Elements elementUtils, final TypeElement typeElement, String SUFFIX) {
-        this.SUFFIX=SUFFIX;
+        this.SUFFIX = SUFFIX;
         this.typeElement = typeElement;
         PackageElement packageElement = elementUtils.getPackageOf(typeElement);
         packageName = packageElement.getQualifiedName().toString();
@@ -36,6 +36,7 @@ public abstract class BaseProxyInfo {
 
     /**
      * 生成java文件的内容
+     *
      * @return
      */
     public String generateJavaCode() {
@@ -44,8 +45,9 @@ public abstract class BaseProxyInfo {
         //生成类
         stringBuilder.append("// 自动生成 禁止修改!\n")
                 .append("package ").append(packageName).append(";\n\n")
-                .append("import ladyishenlong.com.ioc.*;\n\n")
-                .append("public class ").append(proxyClassName).append(" implements ").append(SUFFIX).append("<").append(typeElement.getQualifiedName()).append(">").append("{\n");
+                .append("import ladyishenlong.com.ioc.*;\n\n");
+        headfile(stringBuilder);
+        stringBuilder.append("public class ").append(proxyClassName).append(" implements ").append(SUFFIX).append("<").append(typeElement.getQualifiedName()).append(">").append("{\n");
         generateMethod(stringBuilder);
         stringBuilder.append("\n}\n");
         return stringBuilder.toString();
@@ -53,14 +55,20 @@ public abstract class BaseProxyInfo {
 
     /**
      * 生成类中的方法
-     * */
+     */
     protected abstract void generateMethod(StringBuilder stringBuilder);
 
+    /**
+     * 添加头文件
+     */
+    protected  void headfile(StringBuilder stringBuilder){
 
+    }
 
 
     /**
      * 代理类的全名
+     *
      * @return
      */
     public String getProxyClassFullName() {
@@ -69,6 +77,7 @@ public abstract class BaseProxyInfo {
 
     /**
      * 获得类
+     *
      * @return
      */
     public TypeElement getTypeElement() {

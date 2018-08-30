@@ -18,6 +18,7 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 
 /**
@@ -73,6 +74,12 @@ public abstract class BaseProcessor<T extends BaseProxyInfo> extends AbstractPro
      * 子类处理注解
      */
     protected abstract void processAnnotation(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment);
+
+    protected void printMessage(String message){
+        messager.printMessage(Diagnostic.Kind.NOTE, message);
+
+    }
+
 
 
 }

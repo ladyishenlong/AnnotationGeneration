@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import ladyishenlong.com.ioc.LayoutBinder;
 import ladyishenlong.com.ioc.ViewBinder;
+import ladyishenlong.com.ioc_annotation.BindLayout;
 import ladyishenlong.com.ioc_annotation.BindView;
 
 /**
@@ -14,7 +16,8 @@ import ladyishenlong.com.ioc_annotation.BindView;
  * 2、创建ioc androidLibrary 编写注解的入口
  * 3、创建ioc-processor 编写注解的解释器
  */
-public class MainActivity extends AppCompatActivity {
+@BindLayout(R.layout.activity_main)
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.tv)
     TextView tv;
@@ -22,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ViewBinder.bind(this);
+
         tv.setText("6666");
     }
 
